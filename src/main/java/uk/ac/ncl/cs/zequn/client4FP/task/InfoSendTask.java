@@ -16,6 +16,7 @@ public class InfoSendTask extends TimerTask {
     private final RestTemplate restTemplate;
     private final String services;
     private final Monitor4Latency monitor;
+    public static int realCount = 0;
     public InfoSendTask(String services,Monitor4Latency monitor){
         random = new Random();
         this.restTemplate = new RestTemplate();
@@ -24,6 +25,7 @@ public class InfoSendTask extends TimerTask {
     }
     @Override
     public void run() {
+        realCount++;
         serviceSb = new StringBuilder();
         serviceSb.append(Config.sendInfoServiceUrl).append(services).append("/").append(System.currentTimeMillis()).append("/").append(random.nextDouble()*100);
         monitor.before();

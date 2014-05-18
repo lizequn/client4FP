@@ -20,8 +20,9 @@ public class GetResultTask extends TimerTask {
     @Override
     public void run() {
         serviceSb = new StringBuilder();
-        serviceSb.append(Config.getResultServiceUrl).append(services);
-        ResultSet set = restTemplate.getForObject(serviceSb.toString(), ResultSet.class);
-        System.out.println(set.getInfo());
+        //serviceSb.append(Config.getResultServiceUrl).append(services);
+        serviceSb.append(Config.getResultServiceUrl).append("/test/testinfo");
+        int set = restTemplate.getForObject(serviceSb.toString(), Integer.class);
+        System.out.println(set);
     }
 }
