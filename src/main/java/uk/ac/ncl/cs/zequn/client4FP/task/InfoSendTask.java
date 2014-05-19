@@ -28,8 +28,12 @@ public class InfoSendTask extends TimerTask {
         realCount++;
         serviceSb = new StringBuilder();
         serviceSb.append(Config.sendInfoServiceUrl).append(services).append("/").append(System.currentTimeMillis()).append("/").append(random.nextDouble()*100);
-        monitor.before();
+        if(null != monitor){
+            monitor.before();
+        }
         restTemplate.getForObject(serviceSb.toString(),Integer.class);
-        monitor.after();
+        if(null!=monitor){
+            monitor.after();
+        }
     }
 }
