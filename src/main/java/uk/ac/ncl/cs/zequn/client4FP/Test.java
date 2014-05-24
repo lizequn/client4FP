@@ -25,23 +25,26 @@ public class Test {
         LogAccess logAccess = new LogAccess("latency100");
         ShowLatencyTask showResultTask = new ShowLatencyTask(latency,logAccess);
         GetResultTask getResultTask = new GetResultTask(services);
-        for (int j = 0; j < 100; j++) {
+        for (int j = 0; j < 10; j++) {
             if(j==0){
                 InfoSendTask infoSendTask = new InfoSendTask(services,latency);
-                timer.scheduleAtFixedRate(infoSendTask,0,10);
+                timer.scheduleAtFixedRate(infoSendTask,0,1);
             }else {
                 InfoSendTask infoSendTask = new InfoSendTask(services,null);
-                timer.scheduleAtFixedRate(infoSendTask,0,10);
+                timer.scheduleAtFixedRate(infoSendTask,0,1);
             }
         }
         timer.scheduleAtFixedRate(getResultTask,1000,1000);
         timer.scheduleAtFixedRate(showResultTask,0,1000);
-        Thread.sleep(600000);
+        Thread.sleep(60000);
         timer.cancel();
         System.out.println(InfoSendTask.realCount);
         //serviceSb.append(Config.getResultServiceUrl).append(services);
         int set = restTemplate.getForObject(Config.getResultServiceUrl + "/test/testinfo", Integer.class);
         System.out.println(set);
-        logAccess.output2CSV("D://",logAccess.getTable()+".csv");
+       // logAccess.output2CSV("D://",logAccess.getTable()+".csv");
+        StringBuilder urlStop = new StringBuilder();
+        urlStop.append(Config.stopServiceUrl).append(services);
+        restTemplate.getForObject(urlStop.toString(),Integer.class);
     }
 }

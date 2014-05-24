@@ -8,4 +8,5 @@ public class Config {
     public static String beginServiceUrl= baseUrl+"/begin";
     public static String sendInfoServiceUrl = baseUrl+"/info";
     public static String getResultServiceUrl = baseUrl+"/result";
+    public static String stopServiceUrl = baseUrl+"/begin";
 }
